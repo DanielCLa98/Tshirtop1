@@ -1,0 +1,35 @@
+"""
+A product entity representing an item available in the catalog.
+"""
+type Product {
+  """
+  The unique identifier for the product.
+  """
+  id: ID!
+  """
+  The name of the product.
+  """
+  name: String!
+  """
+  A detailed description of the product.
+  """
+  description: String
+  """
+  The price of the product.
+  """
+  price: Float!
+}
+
+"""
+The root query type for retrieving products.
+"""
+type Query {
+  """
+  Get a product by its unique ID.
+  """
+  getProduct(id: ID!): Product
+  """
+  Get a list of all available products.
+  """
+  getAllProducts: [Product!]!
+}

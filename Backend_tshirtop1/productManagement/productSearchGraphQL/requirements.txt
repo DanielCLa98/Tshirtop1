@@ -1,0 +1,7 @@
+Flask
+Flask-GraphQL
+graphene
+graphql-core
+mysql-connector-python
+python-dotenv
+SQLAlchemy

@@ -1,0 +1,20 @@
+# Use Python 3.9 as a base
+FROM python:3.9
+
+# Defines the working directory inside the container
+WORKDIR /app
+
+# Copy configuration files
+COPY requirements.txt .
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of the microservice code
+COPY . .
+
+# Expose the port of the GraphQL service
+EXPOSE ${GRAPHQL_PORT}
+
+# Run Flask server with GraphQL
+CMD ["sh", "-c", "python server.py"]
