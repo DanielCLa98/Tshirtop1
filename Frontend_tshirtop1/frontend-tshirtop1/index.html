@@ -1,13 +1,217 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>T-SHIRTTOP</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T-shirtTop - Tu Tienda de Moda</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+        }
+        nav {
+            background-color: #333;
+            padding: 10px 0;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+        }
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .main-content {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 5px;
+        }
+        .section-title {
+            text-align: center;
+            color: #4CAF50;
+            margin-bottom: 30px;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            padding: 20px 0;
+        }
+        .product-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        .product-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        .favorite-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            color: #ccc;
+        }
+        .favorite-btn:hover {
+            color: #ff4444;
+        }
+        .product-title {
+            font-size: 1em;
+            margin: 10px 0;
+            color: #333;
+        }
+        .product-price {
+            font-weight: bold;
+            color: #4CAF50;
+            margin: 5px 0;
+        }
+        .sizes {
+            display: flex;
+            gap: 5px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 10px 0;
+        }
+        .size-tag {
+            background-color: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.8em;
+            color: #666;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>T-shirtTop</h1>
+        <p>Tu destino para la moda urbana</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#categorias">Categorías</a></li>
+            <li><a href="#productos">Productos</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-content">
+        <section id="productos">
+            <h2 class="section-title">Productos Destacados</h2>
+            <div class="grid-container">
+                <div class="product-card">
+                    <button class="favorite-btn">♡</button>
+                    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-DM5AiPAWqYxYPOUTeREYs6igahBy9G.png" alt="Bufanda Chal Negro">
+                    <h3 class="product-title">Bufanda Chal Negro</h3>
+                    <p class="product-price">$ 11.99</p>
+                    <div class="sizes">
+                        <span class="size-tag">M</span>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <button class="favorite-btn">♡</button>
+                    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-DM5AiPAWqYxYPOUTeREYs6igahBy9G.png" alt="Top Glintz">
+                    <h3 class="product-title">Top Glintz</h3>
+                    <p class="product-price">$ 22.99</p>
+                    <div class="sizes">
+                        <span class="size-tag">XS</span>
+                        <span class="size-tag">S</span>
+                        <span class="size-tag">M</span>
+                        <span class="size-tag">L</span>
+                        <span class="size-tag">XL</span>
+                        <span class="size-tag">XXL</span>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <button class="favorite-btn">♡</button>
+                    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-DM5AiPAWqYxYPOUTeREYs6igahBy9G.png" alt="Short Wide Negro">
+                    <h3 class="product-title">Short Wide Negro</h3>
+                    <p class="product-price">$ 25.99</p>
+                    <div class="sizes">
+                        <span class="size-tag">XS</span>
+                        <span class="size-tag">S</span>
+                        <span class="size-tag">M</span>
+                        <span class="size-tag">L</span>
+                        <span class="size-tag">XL</span>
+                        <span class="size-tag">XXL</span>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <button class="favorite-btn">♡</button>
+                    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-DM5AiPAWqYxYPOUTeREYs6igahBy9G.png" alt="Vestido Fluido">
+                    <h3 class="product-title">Vestido Fluido</h3>
+                    <p class="product-price">$ 39.99</p>
+                    <div class="sizes">
+                        <span class="size-tag">XS</span>
+                        <span class="size-tag">S</span>
+                        <span class="size-tag">M</span>
+                        <span class="size-tag">L</span>
+                        <span class="size-tag">XL</span>
+                        <span class="size-tag">XXL</span>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <button class="favorite-btn">♡</button>
+                    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-DM5AiPAWqYxYPOUTeREYs6igahBy9G.png" alt="Camiseta Over Friendship Disney">
+                    <h3 class="product-title">Camiseta Over Friendship Disney</h3>
+                    <p class="product-price">$ 24.99</p>
+                    <div class="sizes">
+                        <span class="size-tag">XS</span>
+                        <span class="size-tag">S</span>
+                        <span class="size-tag">M</span>
+                        <span class="size-tag">L</span>
+                        <span class="size-tag">XL</span>
+                        <span class="size-tag">XXL</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 T-shirtTop. Todos los derechos reservados.</p>
+    </footer>
+</body>
 </html>
