@@ -5,11 +5,11 @@ const updateCategory = async (req, res) => {
   const { name } = req.body;  // Extract the new category name from request body
 
   if (isNaN(categoryId)) {
-    return res.status(400).json({ error: 'Invalid category ID' }); // Validate ID
+    return res.status(400).json({ error: 'Invalid category ID!.' }); // Validate ID
   }
   // Validate if the name is provided
   if (!name) {
-    return res.status(400).json({ error: 'Name is required' });
+    return res.status(400).json({ error: 'Name is required!.' });
   }
 
   try {
@@ -19,7 +19,7 @@ const updateCategory = async (req, res) => {
     const category = await Category.findByPk(categoryId);
     console.log('✅ Category found:', category);
     if (!category) {
-      return res.status(404).json({ error: 'Category not found' });
+      return res.status(404).json({ error: 'Category not found.!' });
     }
 
     // Update category name
@@ -32,7 +32,7 @@ const updateCategory = async (req, res) => {
     return res.status(200).json(category);
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ error: 'Something went wrong' });
+    return res.status(500).json({ error: 'Something went wrong.' });
   }
 };
 
