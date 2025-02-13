@@ -20,7 +20,7 @@ const createProduct = async (req, res) => {
 
     // Validación de campos requeridos
     if (!productName || !price || !categoryId) {
-      return res.status(400).json({ error: 'Missing required fields: productName, price, and categoryId are required.' });
+      return res.status(400).json({ error: 'Missing required fields: productName, price, and categoryId are required!' });
     }
 
     // Crear el nuevo producto
@@ -43,7 +43,7 @@ const createProduct = async (req, res) => {
     return res.status(201).json(newProduct);
   } catch (error) {
     console.error('Error creating product:', error);
-    return res.status(500).json({ error: 'Internal server error' });
+    return res.status(500).json({ error: 'Internal server error!' });
   }
 };
 
