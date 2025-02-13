@@ -29,7 +29,7 @@ const verifyRecoveryCode = (req, res) => {
         return res.status(400).json({ message: 'Invalid or expired recovery code.' });
     }
 
-    res.json({ message: 'Recovery code verified. You can now reset your password.' });
+    res.json({ message: 'Recovery code verified. You can now reset your password' });
 };
 
 const resetPassword = async (req, res) => {
@@ -37,17 +37,17 @@ const resetPassword = async (req, res) => {
         const { email, code, newPassword } = req.body;
 
         if (!validateCodeExpiration(email, code)) {
-            return res.status(400).json({ message: 'Invalid or expired recovery code.' });
+            return res.status(400).json({ message: 'Invalid or expired recovery code' });
         }
 
         const hashedPassword = await bcrypt.hash(newPassword, 10);
         await User.update({ password: hashedPassword }, { where: { email } });
 
         removeRecoveryCode(email);
-        res.json({ message: 'Password successfully reset.' });
+        res.json({ message: 'Password successfully reset' });
 
     } catch (error) {
-        res.status(500).json({ message: 'Error resetting password.', error: error.message });
+        res.status(500).json({ message: 'Error resetting password', error: error.message });
     }
 };
 
