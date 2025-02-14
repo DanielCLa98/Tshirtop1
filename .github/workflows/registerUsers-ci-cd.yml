@@ -73,14 +73,14 @@ jobs:
           
           # Descargar la última imagen desde Docker Hub
           echo "Actualizando imagen desde Docker Hub..."
-          sudo docker pull ${{ secrets.DOCKER_USER }}/register-user-service:latest
+          sudo docker pull ${{ secrets.DOCKER_USERNAME }}/register-user-service:latest
           
           # Ejecutar el nuevo contenedor en el puerto 80
           echo "Ejecutando nuevo contenedor en el puerto ${{
             secrets.SERVER_PORT_REGISTER_USER }}..."
           sudo docker run -d \
             --name register-user-service \
-            -p 80:${{ secrets.SERVER_PORT_REGISTER_USER }} \
+            -p 3001:${{ secrets.SERVER_PORT_REGISTER_USER }} \
             -e DB_NAME=${{ secrets.REGISTER_USER_BD }} \
             -e DB_USER=${{ secrets.REGISTER_USER_U }} \
             -e DB_PASSWORD=${{ secrets.REGISTER_USER_PASS }} \
