@@ -36,12 +36,12 @@ jobs:
           --build-arg DB_PASSWORD=${{ secrets.REGISTER_USER_PASS }} \
           --build-arg DB_HOST=${{ secrets.REGISTER_USER_HOST }} \
           --build-arg DB_DIALECT=${{ secrets.REGISTER_USER_DIALECT }} \
-          -t ${{ secrets.DOCKER_USER }}/register-user-service:latest
+          -t ${{ secrets.DOCKER_USERNAME }}/register-user-service:latest
 
     # Paso 4: Subir la imagen a Docker Hub
     - name: Push Docker image to Docker Hub
       run: |
-        docker push ${{ secrets.DOCKER_USER }}/register-user-service:latest
+        docker push ${{ secrets.DOCKER_USERNAME }}/register-user-service:latest
 
   deploy:
     needs: build
