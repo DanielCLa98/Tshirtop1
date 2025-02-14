@@ -75,7 +75,7 @@ jobs:
           echo "Actualizando imagen desde Docker Hub..."
           sudo docker pull ${{ secrets.DOCKER_USERNAME }}/register-user-service:latest
           
-          # Ejecutar el nuevo contenedor en el puerto 80
+          # Ejecutar el nuevo contenedor en el puerto 3015
           echo "Ejecutando nuevo contenedor en el puerto ${{
             secrets.SERVER_PORT_REGISTER_USER }}..."
           sudo docker run -d \
@@ -86,7 +86,7 @@ jobs:
             -e DB_PASSWORD=${{ secrets.REGISTER_USER_PASS }} \
             -e DB_HOST=${{ secrets.REGISTER_USER_HOST }} \
             -e DB_DIALECT=${{ secrets.REGISTER_USER_DIALECT }} \
-            ${{ secrets.DOCKER_USER }}/register-user-service:latest
+            ${{ secrets.DOCKER_USERNAME }}/register-user-service:latest
 
           # Verificar que el contenedor esté corriendo
           if sudo docker ps -f name=register-user-service | grep register-user-service; then
