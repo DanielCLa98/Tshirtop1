@@ -18,7 +18,7 @@ class Query(ObjectType):
         try:
             product = session.query(Product).filter(Product.id == id).first()
             if not product:
-                return None  # 🔹 Si el producto no existe, devuelve `None`
+                return None  # 🔹 If the product does not exist, return `None`
             return product
         finally:
             session.close()
