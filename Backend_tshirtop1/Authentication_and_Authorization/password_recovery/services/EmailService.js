@@ -10,10 +10,10 @@ const transporter = nodemailer.createTransport({
         pass: process.env.MAIL_PASSWORD
     },
     tls: {
-        rejectUnauthorized: false, // Permite conexiones TLS sin verificar el certificado
+        rejectUnauthorized: false, 
     },
-    logger: false, // Habilita logs detallados en la consola
-    debug: true // Habilita modo depuración en Nodemailer
+    logger: false, 
+    debug: true 
 });
 
 const sendRecoveryEmail = async (email, code) => {

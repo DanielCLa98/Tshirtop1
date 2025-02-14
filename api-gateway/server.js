@@ -26,12 +26,12 @@ const services = {
   graphql: 'http://localhost:3010',
 };
 
-// 📌 Función para crear rutas dinámicas en el API Gateway
+// 📌 Function to create dynamic routes in the API Gateway
 const setupProxy = (route, target) => {
   app.use(route, createProxyMiddleware({ target, changeOrigin: true }));
 };
 
-// 📌 Configurar las rutas del API Gateway
+// 📌 Configure API Gateway routes
 setupProxy('/api/products/create', services.createProduct);
 setupProxy('/api/products', `${services.getAllProducts}/api/products`);
 setupProxy('/api/products/:id', services.getProductById);

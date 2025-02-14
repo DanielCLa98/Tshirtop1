@@ -16,7 +16,7 @@ const Category = sequelize.define(
     },
   },
   {
-    tableName: 'Categories', // Name the table 
+    tableName: 'Categories', // Name of the table 
     timestamps: false,
   }
 );

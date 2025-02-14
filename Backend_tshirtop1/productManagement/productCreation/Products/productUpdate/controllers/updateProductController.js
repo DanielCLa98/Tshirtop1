@@ -8,7 +8,7 @@ const updateProduct = async (req, res) => {
     const product = await Product.findOne({ where: { productId } });
 
     if (!product) {
-      return res.status(404).json({ message: 'Product not found' });
+      return res.status(404).json({ message: 'Product not found.!' });
     }
 
     const updatedProduct = await product.update({
@@ -29,7 +29,7 @@ const updateProduct = async (req, res) => {
     res.status(200).json(updatedProduct);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Error updating product' });
+    res.status(500).json({ message: 'Error updating product!!:' });
   }
 };
 
