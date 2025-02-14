@@ -80,7 +80,7 @@ jobs:
             secrets.SERVER_PORT_REGISTER_USER }}..."
           sudo docker run -d \
             --name register-user-service \
-            -p 3001:${{ secrets.SERVER_PORT_REGISTER_USER }} \
+            -p 3015:${{ secrets.SERVER_PORT_REGISTER_USER }} \
             -e DB_NAME=${{ secrets.REGISTER_USER_BD }} \
             -e DB_USER=${{ secrets.REGISTER_USER_U }} \
             -e DB_PASSWORD=${{ secrets.REGISTER_USER_PASS }} \
