@@ -7,7 +7,7 @@ const registerRoutes = require('./routes/Register_User_Routes');
 const cors = require('cors');
 
 const app = express();
-//prueba
+
 app.use(cors({
   origin: "http://localhost:5173",
   methods: "POST",
