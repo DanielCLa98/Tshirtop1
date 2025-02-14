@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Exponemos el puerto que la aplicación va a utilizar (puedes cambiar este puerto si es necesario)
-EXPOSE 3005
+EXPOSE 3015
 
 # Establecemos las variables de entorno desde los secretos de GitHub Actions
 # Estas variables serán accesibles dentro del contenedor
