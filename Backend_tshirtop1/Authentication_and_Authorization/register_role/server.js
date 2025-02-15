@@ -22,7 +22,7 @@ const startServer = async () => {
     await sequelize.sync({ force: false });
     console.log('Database synchronized successfully');
 
-    const PORT = process.env.PORT || 3000;
+    const PORT = process.env.PORT || 3016;
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
       console.log(`Swagger Docs available at http://localhost:${PORT}/api-docs`);
