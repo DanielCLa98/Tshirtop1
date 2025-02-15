@@ -8,11 +8,7 @@ const cors = require('cors');
 
 const app = express();
 
-app.use(cors({
-  origin: "http://localhost:5173",
-  methods: "POST",
-  allowedHeaders: "Content-Type"
-}));
+app.use(cors()); // Esto permite solicitudes desde cualquier origen
 
 app.use(bodyParser.json());
 
