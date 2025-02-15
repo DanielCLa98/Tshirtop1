@@ -13,7 +13,7 @@ app.use(cors({
   methods: "POST",
   allowedHeaders: "Content-Type"
 }));
-//tes2
+
 app.use(bodyParser.json());
 
 app.use('/register', registerRoutes);
