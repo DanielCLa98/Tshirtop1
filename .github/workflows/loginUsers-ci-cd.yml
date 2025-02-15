@@ -7,7 +7,7 @@ on:
     branches: ["test"]
   pull_request:
     paths:
-      - Backend_tshirtop1/Authentication_and_Authorization/login_user/**'
+      - 'Backend_tshirtop1/Authentication_and_Authorization/login_user/**'
     branches: ["QA", "main"]
 
 jobs:
@@ -29,13 +29,13 @@ jobs:
     # Paso 3: Construir la imagen Docker usando los secrets
     - name: Build Docker image
       run: |
-         docker build Backend_tshirtop1/Authentication_and_Authorization/login_user/**/. --file Backend_tshirtop1/Authentication_and_Authorization/login_user/Dockerfile \
+        docker build Backend_tshirtop1/Authentication_and_Authorization/login_user --file Backend_tshirtop1/Authentication_and_Authorization/login_user/Dockerfile \
           --build-arg DB_NAME=${{ secrets.REGISTER_USER_BD }} \
           --build-arg DB_USER=${{ secrets.REGISTER_USER_U }} \
           --build-arg DB_PASSWORD=${{ secrets.REGISTER_USER_PASS }} \
           --build-arg DB_HOST=${{ secrets.REGISTER_USER_HOST }} \
           --build-arg DB_DIALECT=${{ secrets.REGISTER_USER_DIALECT }} \
-          -t ${{ secrets.DOCKER_USERNAME }}/register-user-service:latest
+          -t ${{ secrets.DOCKER_USERNAME }}/login-user-service:latest
 
     # Paso 4: Subir la imagen a Docker Hub
     - name: Push Docker image to Docker Hub
@@ -67,8 +67,8 @@ jobs:
 
           # Detener y eliminar el contenedor previo si existe
           echo "Deteniendo y eliminando contenedor previo..."
-          sudo docker stop create-product-service || true
-          sudo docker rm create-product-service || true
+          sudo docker stop login-user-service || true
+          sudo docker rm login-user-service || true
           
           # Descargar la última imagen desde Docker Hub
           echo "Actualizando imagen desde Docker Hub..."
@@ -76,19 +76,19 @@ jobs:
           
           # Ejecutar el nuevo contenedor en el puerto 3306
           echo "Ejecutando nuevo contenedor en el puerto ${{
-            secrets.SERVER_PORT_CREATE_PRODUCT }}..."
+            secrets.SERVER_PORT_LOGIN_USER }}..."
           sudo docker run -d \
-            --name register-user-service \
+            --name login-user-service \
             -p 3306:${{ secrets.SERVER_PORT_LOGIN_USER }} \
             -e DB_NAME=${{ secrets.REGISTER_USER_BD }} \
             -e DB_USER=${{ secrets.REGISTER_USER_U }} \
             -e DB_PASSWORD=${{ secrets.REGISTER_USER_PASS }} \
             -e DB_HOST=${{ secrets.REGISTER_USER_HOST }} \
             -e DB_DIALECT=${{ secrets.REGISTER_USER_DIALECT }} \
-            ${{ secrets.DOCKER_USERNAME }}/register-user-service:latest
+            ${{ secrets.DOCKER_USERNAME }}/login-user-service:latest
 
           # Verificar que el contenedor esté corriendo
-          if sudo docker ps -f name=create-product-service | grep create-product-service; then
+          if sudo docker ps -f name=login-user-service | grep login-user-service; then
             echo "Contenedor corriendo correctamente."
           else
             echo "Error al iniciar el contenedor. Revisa los logs."
