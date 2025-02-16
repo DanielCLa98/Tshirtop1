@@ -3,11 +3,11 @@ name: Docker Image CI/CD for Product Service - Create
 on:
   push:
     paths:
-      - 'Backend_tshirtop1/productManagement/productCreation/Products/productDelete/**'
+      - 'Backend_tshirtop1/productManagement/productCreation/Products/productCreate/**'
     branches: ["test"]
   pull_request:
     paths:
-      - 'Backend_tshirtop1/productManagement/productCreation/Products/productDelete**'
+      - 'Backend_tshirtop1/productManagement/productCreation/Products/productCreate**'
     branches: ["QA", "main"]
 
 jobs:
