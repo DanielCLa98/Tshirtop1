@@ -1,20 +1,37 @@
-# Use Node.js as a base
-FROM node:18
+# Usamos la imagen base de Node.js
+FROM node:14
 
-# Defines the working directory inside the container
-WORKDIR /app
+# Establecemos el directorio de trabajo en el contenedor
+WORKDIR /usr/src/app
 
-# Copy the project configuration files
+# Copiamos los archivos package.json y package-lock.json (si los tienes)
 COPY package*.json ./
 
-# Install dependencies
+# Instalamos las dependencias de Node.js
 RUN npm install
+RUN npm install mysql2  # Instalar mysql2 explícitamente
 
-# Copy the rest of the microservice code
+# Copiamos todo el código fuente al contenedor
 COPY . .
 
-# Expose the port defined in the .env file
-EXPOSE ${PORT}
+# Exponemos el puerto que la aplicación va a utilizar
+EXPOSE 3004
 
-# Load environment variables and run the service
-CMD ["sh", "-c", "node server.js"]
+# Establecemos las variables de entorno desde los build args
+ARG DB_NAME
+ARG DB_USER
+ARG DB_PASSWORD
+ARG DB_HOST
+ARG DB_PORT
+
+ENV DB_NAME=$DB_NAME \
+    DB_USER=$DB_USER \
+    DB_PASSWORD=$DB_PASSWORD \
+    DB_HOST=$DB_HOST \
+    DB_PORT=$DB_PORT
+
+ENV SERVER_PORT=3004
+EXPOSE 3004
+
+# Comando para ejecutar la aplicación Node.js
+CMD ["node", "server.js"]
