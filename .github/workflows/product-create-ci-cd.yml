@@ -78,7 +78,7 @@ jobs:
             secrets.PRODUCTS_DB_PORT }}..."
           sudo docker run -d \
             --name create-product-service \
-            -p 3003:${{ secrets.SERVER_PORT_REGISTER_PRODUCT }} \
+            -p 3000:${{ secrets.SERVER_PORT_REGISTER_PRODUCT }} \
             -e DB_NAME=${{ secrets.PRODUCTS_DB }} \
             -e DB_USER=${{ secrets.PRODUCTS_USER_U }} \
             -e DB_PASSWORD=${{ secrets.REGISTER_PRODUCT_PASS }} \
