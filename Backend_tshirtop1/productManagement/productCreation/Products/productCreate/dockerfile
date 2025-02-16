@@ -9,14 +9,15 @@ COPY package*.json ./
 
 # Instalamos las dependencias de Node.js
 RUN npm install
+RUN npm install mysql2  # Instalar mysql2 explícitamente
 
 # Copiamos todo el código fuente al contenedor
 COPY . .
 
-# Exponemos el puerto que la aplicación va a utilizar (puedes cambiar este puerto si es necesario)
+# Exponemos el puerto que la aplicación va a utilizar
 EXPOSE 3000
 
-# Establecemos las variables de entorno desde los build args (los pasamos desde GitHub Actions)
+# Establecemos las variables de entorno desde los build args
 ARG DB_NAME
 ARG DB_USER
 ARG DB_PASSWORD
