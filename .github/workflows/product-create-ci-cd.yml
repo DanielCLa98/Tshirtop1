@@ -1,13 +1,13 @@
-name: Docker Image CI/CD for Product Service - Create
+name: Docker Image CI/CD for Product Service - Delete
 
 on:
   push:
     paths:
-      - 'Backend_tshirtop1/productManagement/productCreation/Products/productCreate/**'
+      - 'Backend_tshirtop1/productManagement/productCreation/Products/productDelete/**'
     branches: ["test"]
   pull_request:
     paths:
-      - 'Backend_tshirtop1/productManagement/productCreation/Products/productCreate/**'
+      - 'Backend_tshirtop1/productManagement/productCreation/Products/productDelete**'
     branches: ["QA", "main"]
 
 jobs:
@@ -29,18 +29,18 @@ jobs:
     # Paso 3: Construir la imagen Docker usando los secrets
     - name: Build Docker image
       run: |
-        docker build Backend_tshirtop1/productManagement/productCreation/Products/productCreate/. --file Backend_tshirtop1/productManagement/productCreation/Products/productCreate/Dockerfile \
+        docker build Backend_tshirtop1/productManagement/productCreation/Products/productDelete/. --file Backend_tshirtop1/productManagement/productCreation/Products/productDelete/Dockerfile \
           --build-arg DB_NAME=${{ secrets.PRODUCTS_DB }} \
           --build-arg DB_USER=${{ secrets.PRODUCTS_USER_U }} \
           --build-arg DB_PASSWORD=${{ secrets.REGISTER_PRODUCT_PASS }} \
           --build-arg DB_HOST=${{ secrets.EC2_HOST_REGISTER_PRODUCT }} \
           --build-arg DB_PORT=${{ secrets.SERVER_PORT_REGISTER_PRODUCT }} \
-          -t ${{ secrets.DOCKER_USERNAME }}/create-product-service:latest
-
+          -t ${{ secrets.DOCKER_USERNAME }}/delete-product-service:latest
+  
     # Paso 4: Subir la imagen a Docker Hub
     - name: Push Docker image to Docker Hub
       run: |
-        docker push ${{ secrets.DOCKER_USERNAME }}/create-product-service:latest
+        docker push ${{ secrets.DOCKER_USERNAME }}/delete-product-service:latest
 
   deploy:
     needs: build
@@ -50,7 +50,7 @@ jobs:
     - name: Deploy to EC2
       uses: appleboy/ssh-action@v0.1.8
       with:
-        host: ${{ secrets.EC2_HOST_CREATE_PRODUCT }}
+        host: ${{ secrets.EC2_HOST_DELETE_PRODUCT }}
         username: ${{ secrets.EC2_USER }}
         key: ${{ secrets.EC2_SSH_KEY }}
         port: 22
@@ -63,30 +63,30 @@ jobs:
             sudo service docker start
             sudo usermod -a -G docker ec2-user
           fi
-          
+
           # Detener y eliminar el contenedor previo si existe
           echo "Deteniendo y eliminando contenedor previo..."
-          sudo docker stop create-product-service || true
-          sudo docker rm create-product-service || true
-          
+          sudo docker stop delete-product-service || true
+          sudo docker rm delete-product-service || true
+
           # Descargar la última imagen desde Docker Hub
           echo "Actualizando imagen desde Docker Hub..."
-          sudo docker pull ${{ secrets.DOCKER_USERNAME }}/create-product-service:latest
-          
-          # Ejecutar el nuevo contenedor en el puerto xxx
+          sudo docker pull ${{ secrets.DOCKER_USERNAME }}/delete-product-service:latest
+
+          # Ejecutar el nuevo contenedor en el puerto 3000
           echo "Ejecutando nuevo contenedor en el puerto ${{
             secrets.PRODUCTS_DB_PORT }}..."
           sudo docker run -d \
-            --name create-product-service \
+            --name delete-product-service \
             -p 3000:${{ secrets.SERVER_PORT_REGISTER_PRODUCT }} \
             -e DB_NAME=${{ secrets.PRODUCTS_DB }} \
             -e DB_USER=${{ secrets.PRODUCTS_USER_U }} \
             -e DB_PASSWORD=${{ secrets.REGISTER_PRODUCT_PASS }} \
             -e DB_HOST=${{ secrets.EC2_HOST_REGISTER_PRODUCT }} \
-            ${{ secrets.DOCKER_USERNAME }}/create-product-service:latest
+            ${{ secrets.DOCKER_USERNAME }}/delete-product-service:latest
 
           # Verificar que el contenedor esté corriendo
-          if sudo docker ps -f name=create-product-service | grep create-product-service; then
+          if sudo docker ps -f name=delete-product-service | grep delete-product-service; then
             echo "Contenedor corriendo correctamente."
           else
             echo "Error al iniciar el contenedor. Revisa los logs."
