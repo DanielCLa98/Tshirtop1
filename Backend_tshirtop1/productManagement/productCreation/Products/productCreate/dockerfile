@@ -1,20 +1,32 @@
-# Use Node.js as a base
-FROM node:18
+# Usamos la imagen base de Node.js
+FROM node:14
 
-# Defines the working directory inside the container
-WORKDIR /app
+# Establecemos el directorio de trabajo en el contenedor
+WORKDIR /usr/src/app
 
-# Copy the project configuration files
+# Copiamos los archivos package.json y package-lock.json (si los tienes)
 COPY package*.json ./
 
-# Install dependencies
+# Instalamos las dependencias de Node.js
 RUN npm install
 
-# Copy the rest of the microservice code
+# Copiamos todo el código fuente al contenedor
 COPY . .
 
-# Expose the port defined in the .env file
-EXPOSE ${PORT}
+# Exponemos el puerto que la aplicación va a utilizar (puedes cambiar este puerto si es necesario)
+EXPOSE 3000
 
-# Load environment variables and run the service
-CMD ["sh", "-c", "node server.js"]
+# Establecemos las variables de entorno desde los secretos de GitHub Actions
+# Estas variables serán accesibles dentro del contenedor
+ENV DB_NAME=${{ secrets.PRODUCTS_DB }} \
+ENV DB_USER=${{ secrets.PRODUCTS_USER_U }} \
+ENV DB_PASSWORD=${{ secrets.REGISTER_PRODUCT_PASS }} \
+ENV DB_HOST=${{ secrets.EC2_HOST_REGISTER_PRODUCT }} \
+ENV DB_PORT=${{ secrets.SERVER_PORT_REGISTER_PRODUCT }}
+
+ENV SERVER_PORT=3000
+EXPOSE 3000
+
+
+# Comando para ejecutar la aplicación Node.js
+CMD ["node", "server.js"]
