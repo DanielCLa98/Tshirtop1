@@ -4,7 +4,7 @@ require('dotenv').config();
 const sequelize = require('./config/database');
 const swaggerUi = require('swagger-ui-express');
 const swaggerJsDoc = require('swagger-jsdoc');
-
+//tet
 const app = express();
 const port = process.env.PORT || 3000;
 
