@@ -4,7 +4,6 @@ const sequelize = require('./config/Database');
 const roleRoutes = require('./routes/Role_routes');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocs = require('./config/swagger');
-//prueba2
 const app = express();
 
 // Middlewares
