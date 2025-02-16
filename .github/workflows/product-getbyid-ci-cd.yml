@@ -3,11 +3,11 @@ name: Docker Image CI/CD for Product Service - GetById
 on:
   push:
     paths:
-      - 'Backend_tshirtop1\productManagement\productCreation\Products\productGetById/**'
+      - 'Backend_tshirtop1/productManagement/productCreation/Products/productGetById/**'
     branches: ["test"]
   pull_request:
     paths:
-      - 'Backend_tshirtop1\productManagement\productCreation\Products\productGetById**'
+      - 'Backend_tshirtop1/productManagement/productCreation/Products/productGetById**'
     branches: ["QA", "main"]
 
 jobs:
@@ -25,19 +25,20 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-	
-	 # Paso 3: Construir la imagen Docker usando los secrets
+    
+    # Paso 3: Construir la imagen Docker usando los secrets
     - name: Build Docker image
       run: |
-        docker build Backend_tshirtop1\productManagement\productCreation\Products\productGetById/. --file Backend_tshirtop1\productManagement\productCreation\Products\productGetById/Dockerfile \
+        docker build Backend_tshirtop1/productManagement/productCreation/Products/productGetById/. --file Backend_tshirtop1/productManagement/productCreation/Products/productGetById/Dockerfile \
           --build-arg DB_NAME=${{ secrets.PRODUCTS_DB }} \
-		  --build-arg DB_USER=${{ secrets.PRODUCTS_USER_U }} \
-		  --build-arg DB_PASSWORD=${{ secrets.REGISTER_PRODUCT_PASS }} \
+          --build-arg DB_USER=${{ secrets.PRODUCTS_USER_U }} \
+          --build-arg DB_PASSWORD=${{ secrets.REGISTER_PRODUCT_PASS }} \
           --build-arg DB_HOST=${{ secrets.EC2_HOST_REGISTER_PRODUCT }} \
-		  --build-arg DB_PORT=${{ secrets.SERVER_PORT_REGISTER_PRODUCT }} \
+          --build-arg DB_PORT=${{ secrets.SERVER_PORT_REGISTER_PRODUCT }} \
+          --build-arg DB_DIALECT=${{ secrets.REGISTER_USER_DIALECT }} \
           -t ${{ secrets.DOCKER_USERNAME }}/getbyid-product-service:latest
-		  
-	# Paso 4: Subir la imagen a Docker Hub
+          
+    # Paso 4: Subir la imagen a Docker Hub
     - name: Push Docker image to Docker Hub
       run: |
         docker push ${{ secrets.DOCKER_USERNAME }}/getbyid-product-service:latest
@@ -45,7 +46,7 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-	steps:
+    steps:
     # Paso 1: Conectar al servidor EC2 usando SSH
     - name: Deploy to EC2
       uses: appleboy/ssh-action@v0.1.8
@@ -63,29 +64,29 @@ jobs:
             sudo service docker start
             sudo usermod -a -G docker ec2-user
           fi
-		  
-		   # Detener y eliminar el contenedor previo si existe
+
+          # Detener y eliminar el contenedor previo si existe
           echo "Deteniendo y eliminando contenedor previo..."
           sudo docker stop getbyid-product-service || true
           sudo docker rm getbyid-product-service || true
-		  
-		   # Descargar la última imagen desde Docker Hub
+          
+          # Descargar la última imagen desde Docker Hub
           echo "Actualizando imagen desde Docker Hub..."
           sudo docker pull ${{ secrets.DOCKER_USERNAME }}/getbyid-product-service:latest
-		  
-		  # Ejecutar el nuevo contenedor en el puerto 3002
-          echo "Ejecutando nuevo contenedor en el puerto ${{
-            secrets.PRODUCTS_DB_PORT }}..."
+          
+          # Ejecutar el nuevo contenedor en el puerto 3002
+          echo "Ejecutando nuevo contenedor en el puerto 3002..."
           sudo docker run -d \
             --name getbyid-product-service \
-              -p 3002:${{ secrets.SERVER_PORT_REGISTER_PRODUCT }} \
+            -p 3002:3002 \
             -e DB_NAME=${{ secrets.PRODUCTS_DB }} \
             -e DB_USER=${{ secrets.PRODUCTS_USER_U }} \
             -e DB_PASSWORD=${{ secrets.REGISTER_PRODUCT_PASS }} \
             -e DB_HOST=${{ secrets.EC2_HOST_REGISTER_PRODUCT }} \
+            -e DB_DIALECT=${{ secrets.REGISTER_USER_DIALECT }} \
             ${{ secrets.DOCKER_USERNAME }}/getbyid-product-service:latest
-			
-		  # Verificar que el contenedor esté corriendo
+          
+          # Verificar que el contenedor esté corriendo
           if sudo docker ps -f name=getbyid-product-service | grep getbyid-product-service; then
             echo "Contenedor corriendo correctamente."
           else
