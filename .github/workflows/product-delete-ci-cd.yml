@@ -33,8 +33,9 @@ jobs:
           --build-arg DB_NAME=${{ secrets.PRODUCTS_DB }} \
           --build-arg DB_USER=${{ secrets.PRODUCTS_USER_U }} \
           --build-arg DB_PASSWORD=${{ secrets.REGISTER_PRODUCT_PASS }} \
-          --build-arg DB_HOST=${{ secrets.EC2_HOST_REGISTER_PRODUCT }} \
-          --build-arg DB_PORT=${{ secrets.SERVER_PORT_REGISTER_PRODUCT }} \
+          --build-arg DB_HOST=${{ secrets.HOST_PRODUCT_DB }} \
+          --build-arg DB_PORT=${{ secrets.SERVER_PORT_PRODUCTS }} \
+          --build-arg DB_DIALECT=${{ secrets.REGISTER_USER_DIALECT }} \
           -t ${{ secrets.DOCKER_USERNAME }}/delete-product-service:latest
   
     # Paso 4: Subir la imagen a Docker Hub
@@ -78,11 +79,12 @@ jobs:
             secrets.PRODUCTS_DB_PORT }}..."
           sudo docker run -d \
             --name delete-product-service \
-            -p 3003:${{ secrets.SERVER_PORT_REGISTER_PRODUCT }} \
+            -p 3003:3003 \
             -e DB_NAME=${{ secrets.PRODUCTS_DB }} \
             -e DB_USER=${{ secrets.PRODUCTS_USER_U }} \
             -e DB_PASSWORD=${{ secrets.REGISTER_PRODUCT_PASS }} \
-            -e DB_HOST=${{ secrets.EC2_HOST_REGISTER_PRODUCT }} \
+            -e DB_HOST=${{ secrets.EC2_HOST_DELETE_PRODUCT }} \
+            -e DB_DIALECT=${{ secrets.REGISTER_USER_DIALECT }} \
             ${{ secrets.DOCKER_USERNAME }}/delete-product-service:latest
 
           # Verificar que el contenedor esté corriendo
