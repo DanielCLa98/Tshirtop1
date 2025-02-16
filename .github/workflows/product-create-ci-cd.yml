@@ -1,4 +1,4 @@
-name: Docker Image CI/CD for Product Service - Delete
+name: Docker Image CI/CD for Product Service - Create
 
 on:
   push:
