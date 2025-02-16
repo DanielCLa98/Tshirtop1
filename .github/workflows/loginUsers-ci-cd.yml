@@ -35,6 +35,7 @@ jobs:
           --build-arg DB_PASSWORD=${{ secrets.REGISTER_USER_PASS }} \
           --build-arg DB_HOST=${{ secrets.REGISTER_USER_HOST }} \
           --build-arg DB_DIALECT=${{ secrets.REGISTER_USER_DIALECT }} \
+          --build-arg JWT_SECRET=${{ secrets.JWT_SECRET }} \
           -t ${{ secrets.DOCKER_USERNAME }}/login-user-service:latest
 
     # Paso 4: Subir la imagen a Docker Hub
@@ -84,6 +85,7 @@ jobs:
             -e DB_USER=${{ secrets.REGISTER_USER_U }} \
             -e DB_PASSWORD=${{ secrets.REGISTER_USER_PASS }} \
             -e DB_HOST=${{ secrets.REGISTER_USER_HOST }} \
+            -e JWT_SECRET=${{ secrets.JWT_SECRET }} \
             -e DB_DIALECT=${{ secrets.REGISTER_USER_DIALECT }} \
             ${{ secrets.DOCKER_USERNAME }}/login-user-service:latest
 
