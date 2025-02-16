@@ -7,7 +7,7 @@ const swaggerSpec = require('./config/swagger');
 const cors = require('cors');
 //test
 const app = express();
-
+//listo
 app.use(cors({
   origin: "http://localhost:5173",
   methods: "GET,POST",
