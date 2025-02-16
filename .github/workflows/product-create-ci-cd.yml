@@ -33,8 +33,8 @@ jobs:
           --build-arg DB_NAME=${{ secrets.PRODUCTS_DB }} \
           --build-arg DB_USER=${{ secrets.PRODUCTS_USER_U }} \
           --build-arg DB_PASSWORD=${{ secrets.REGISTER_PRODUCT_PASS }} \
-          --build-arg DB_HOST=${{ secrets.EC2_HOST_REGISTER_PRODUCT }} \
-          --build-arg DB_PORT=${{ secrets.SERVER_PORT_REGISTER_PRODUCT }} \
+          --build-arg DB_HOST=${{ secrets.HOST_PRODUCT_DB }} \
+          --build-arg DB_PORT=${{ secrets.SERVER_PORT_PRODUCTS }} \
           -t ${{ secrets.DOCKER_USERNAME }}/create-product-service:latest
   
     # Paso 4: Subir la imagen a Docker Hub
@@ -50,7 +50,7 @@ jobs:
     - name: Deploy to EC2
       uses: appleboy/ssh-action@v0.1.8
       with:
-        host: ${{ secrets.EC2_HOST_REGISTER_PRODUCT }}
+        host: ${{ secrets.EC2_HOST_CREATE_PRODUCT }}
         username: ${{ secrets.EC2_USER }}
         key: ${{ secrets.EC2_SSH_KEY }}
         port: 22
@@ -82,7 +82,8 @@ jobs:
             -e DB_NAME=${{ secrets.PRODUCTS_DB }} \
             -e DB_USER=${{ secrets.PRODUCTS_USER_U }} \
             -e DB_PASSWORD=${{ secrets.REGISTER_PRODUCT_PASS }} \
-            -e DB_HOST=${{ secrets.EC2_HOST_REGISTER_PRODUCT }} \
+            -e DB_HOST=${{ secrets.HOST_PRODUCT_DB }} \
+            -e DB_PORT=${{ secrets.SERVER_PORT_PRODUCTS }} \
             ${{ secrets.DOCKER_USERNAME }}/create-product-service:latest
 
           # Verificar que el contenedor esté corriendo
