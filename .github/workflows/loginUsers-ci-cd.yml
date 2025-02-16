@@ -1,5 +1,5 @@
 name: Docker Image CI/CD for Login Service - Create
-#test
+
 on:
   push:
     paths:
@@ -36,7 +36,9 @@ jobs:
           --build-arg DB_PASSWORD=${{ secrets.REGISTER_USER_PASS }} \
           --build-arg DB_HOST=${{ secrets.REGISTER_USER_HOST }} \
           --build-arg DB_DIALECT=${{ secrets.REGISTER_USER_DIALECT }} \
-          -t ${{ secrets.DOCKER_USERNAME }}/login-user-service:latest
+          --build-arg JWT_SECRET=${{ secrets.JWT_SECRET }} \
+          -t ${{ secrets.DOCKER_USERNAME }}/login-user-service:latest \
+          Backend_tshirtop1/Authentication_and_Authorization/login_user
 
     # Paso 4: Subir la imagen a Docker Hub
     - name: Push Docker image to Docker Hub
