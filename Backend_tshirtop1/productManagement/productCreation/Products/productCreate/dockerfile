@@ -16,17 +16,21 @@ COPY . .
 # Exponemos el puerto que la aplicación va a utilizar (puedes cambiar este puerto si es necesario)
 EXPOSE 3000
 
-# Establecemos las variables de entorno desde los secretos de GitHub Actions
-# Estas variables serán accesibles dentro del contenedor
-ENV DB_NAME=${{ PRODUCTS_DB }} \
-ENV DB_USER=${{ PRODUCTS_USER_U }} \
-ENV DB_PASSWORD=${{ REGISTER_PRODUCT_PASS }} \
-ENV DB_HOST=${{ REGISTER_PRODUCT_HOST }} \
-ENV DB_PORT=${{ SERVER_PORT_REGISTER_PRODUCT }}
+# Establecemos las variables de entorno desde los build args (los pasamos desde GitHub Actions)
+ARG DB_NAME
+ARG DB_USER
+ARG DB_PASSWORD
+ARG DB_HOST
+ARG DB_PORT
+
+ENV DB_NAME=$DB_NAME \
+    DB_USER=$DB_USER \
+    DB_PASSWORD=$DB_PASSWORD \
+    DB_HOST=$DB_HOST \
+    DB_PORT=$DB_PORT
 
 ENV SERVER_PORT=3000
 EXPOSE 3000
-
 
 # Comando para ejecutar la aplicación Node.js
 CMD ["node", "server.js"]
