@@ -55,6 +55,6 @@ const User = sequelize.define('User',{
    timestamps: false, 
 });
 
-User.belongsTo(Role,{foreignKey: 'role_id', as: 'role'});
+User.belongsTo(Role,{foreignKey: 'id_role', as: 'role'});
 
 module.exports = User;

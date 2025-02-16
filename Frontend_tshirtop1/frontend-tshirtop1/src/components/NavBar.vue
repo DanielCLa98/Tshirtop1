@@ -3,7 +3,7 @@
     <div class="container mx-auto flex items-center justify-between py-4 px-6">
       <!-- Logo -->
       <div class="text-2xl font-bold">
-        <router-link to="/">UCEshoes</router-link>
+        <router-link to="/">TshirtShop</router-link>
       </div>
 
       <!-- Menú principal (oculto en móviles) -->
