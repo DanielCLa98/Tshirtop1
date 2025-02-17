@@ -10,7 +10,7 @@
           <p class="text-gray-500 text-lg">{{ product.brand }}</p>
           <p class="text-3xl font-semibold mt-4">${{ product.price }}</p>
           <p class="mt-6 text-gray-700">
-            Este es un producto exclusivo disponible en UCEshoes. Compra ahora antes de que se agote.
+            Este es un producto exclusivo disponible en T-shirtTop. Compra ahora antes de que se agote.
           </p>
   
           <button
