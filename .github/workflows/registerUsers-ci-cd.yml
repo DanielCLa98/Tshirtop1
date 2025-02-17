@@ -30,15 +30,13 @@ jobs:
     # Paso 3: Construir la imagen Docker usando los secrets
     - name: Build Docker image
       run: |
-        docker build \
-          --file Backend_tshirtop1/Authentication_and_Authorization/register_user/Dockerfile \
+        docker build Backend_tshirtop1/Authentication_and_Authorization/register_user/. --file Backend_tshirtop1/Authentication_and_Authorization/register_user/Dockerfile \
           --build-arg DB_NAME=${{ secrets.REGISTER_USER_BD }} \
           --build-arg DB_USER=${{ secrets.REGISTER_USER_U }} \
           --build-arg DB_PASSWORD=${{ secrets.REGISTER_USER_PASS }} \
           --build-arg DB_HOST=${{ secrets.REGISTER_USER_HOST }} \
           --build-arg DB_DIALECT=${{ secrets.REGISTER_USER_DIALECT }} \
-          -t ${{ secrets.DOCKER_USERNAME }}/register-user-service:latest \
-          Backend_tshirtop1/Authentication_and_Authorization/register_user
+          -t ${{ secrets.DOCKER_USERNAME }}/register-user-service:latest
 
     # Paso 4: Subir la imagen a Docker Hub
     - name: Push Docker image to Docker Hub
@@ -78,10 +76,11 @@ jobs:
           sudo docker pull ${{ secrets.DOCKER_USERNAME }}/register-user-service:latest
           
           # Ejecutar el nuevo contenedor en el puerto 3015
-          echo "Ejecutando nuevo contenedor en el puerto 3015..."
+          echo "Ejecutando nuevo contenedor en el puerto ${{
+            secrets.SERVER_PORT_REGISTER_USER }}..."
           sudo docker run -d \
             --name register-user-service \
-            -p 3015:3015 \
+            -p 3015:${{ secrets.SERVER_PORT_REGISTER_USER }} \
             -e DB_NAME=${{ secrets.REGISTER_USER_BD }} \
             -e DB_USER=${{ secrets.REGISTER_USER_U }} \
             -e DB_PASSWORD=${{ secrets.REGISTER_USER_PASS }} \
@@ -95,4 +94,4 @@ jobs:
           else
             echo "Error al iniciar el contenedor. Revisa los logs."
             exit 1
-          fi
+          fi  
