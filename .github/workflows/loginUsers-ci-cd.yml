@@ -3,12 +3,12 @@ name: Docker Image CI/CD for Login User Microservice
 on:
   push:
     paths:
-      - 'Backend_tshirtop1\Authentication_and_Authorization\login_user/**'
+      - 'Backend_tshirtop1/Authentication_and_Authorization/login_user/**'
     branches:
       - 'test'
   pull_request:
     paths:
-      - 'Backend_tshirtop1\Authentication_and_Authorization\login_user/**'
+      - 'Backend_tshirtop1/Authentication_and_Authorization/login_user/**'
     branches: ["QA", "main"]
 
 jobs:
@@ -30,7 +30,7 @@ jobs:
     # Paso 3: Construir la imagen Docker usando los secrets
     - name: Build Docker image
       run: |
-        docker build Backend_tshirtop1\Authentication_and_Authorization\login_user/. --file Backend_tshirtop1\Authentication_and_Authorization\login_user/Dockerfile \
+        docker build Backend_tshirtop1/Authentication_and_Authorization/login_user/. --file Backend_tshirtop1/Authentication_and_Authorization/login_user/Dockerfile \
           --build-arg DB_NAME=${{ secrets.REGISTER_USER_BD }} \
           --build-arg DB_USER=${{ secrets.REGISTER_USER_U }} \
           --build-arg DB_PASSWORD=${{ secrets.REGISTER_USER_PASS }} \
