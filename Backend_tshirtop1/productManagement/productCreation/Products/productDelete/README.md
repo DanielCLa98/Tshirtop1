@@ -1,3 +1,7 @@
-# TshirtTop_PD
-# Product Catalog, Search and Filter products
-# BD: MySql
+# productDelete  
+
+In this microservice, you can delete a product from the database.  
+
+### Technologies Used:  
+- **MySQL**  
+- **JavaScript**  
