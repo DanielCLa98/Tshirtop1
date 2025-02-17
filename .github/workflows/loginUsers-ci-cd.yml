@@ -26,7 +26,7 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
     
-    # Paso 3: Construir la imagen Docker usando los secrets
+  # Paso 3: Construir la imagen Docker usando los secrets
     - name: Build Docker image
       run: |
         docker build Backend_tshirtop1/Authentication_and_Authorization/login_user/. --file Backend_tshirtop1/Authentication_and_Authorization/login_user/Dockerfile \
@@ -35,8 +35,8 @@ jobs:
           --build-arg DB_PASSWORD=${{ secrets.REGISTER_USER_PASS }} \
           --build-arg DB_HOST=${{ secrets.REGISTER_USER_HOST }} \
           --build-arg DB_DIALECT=${{ secrets.REGISTER_USER_DIALECT }} \
-          --build-arg JWT_SECRET=${{ secrets.JWT_SECRET }} \
           -t ${{ secrets.DOCKER_USERNAME }}/login-user-service:latest
+
 
     # Paso 4: Subir la imagen a Docker Hub
     - name: Push Docker image to Docker Hub
