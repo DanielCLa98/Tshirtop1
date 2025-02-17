@@ -42,7 +42,7 @@ const User = sequelize.define('User',{
         type: DataTypes.DATE,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
     },
-    role_id:{
+    id_role:{
         type: DataTypes.INTEGER,
         allowNull: false,
         references:{
