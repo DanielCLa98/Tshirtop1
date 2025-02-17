@@ -29,12 +29,14 @@ jobs:
     # Paso 3: Construir la imagen Docker usando los secrets
     - name: Build Docker image
       run: |
-        docker build Backend_tshirtop1/Authentication_and_Authorization/login_user/. --file Backend_tshirtop1/Authentication_and_Authorization/login_user/Dockerfile \
+        docker build \
+          --file Backend_tshirtop1/Authentication_and_Authorization/login_user/Dockerfile \
           --build-arg DB_NAME=${{ secrets.REGISTER_USER_BD }} \
           --build-arg DB_USER=${{ secrets.REGISTER_USER_U }} \
           --build-arg DB_PASSWORD=${{ secrets.REGISTER_USER_PASS }} \
           --build-arg DB_HOST=${{ secrets.REGISTER_USER_HOST }} \
           --build-arg DB_DIALECT=${{ secrets.REGISTER_USER_DIALECT }} \
+          --build-arg JWT_SECRET=${{ secrets.JWT_SECRET }} \
           -t ${{ secrets.DOCKER_USERNAME }}/login-user-service:latest \
           Backend_tshirtop1/Authentication_and_Authorization/login_user
 
@@ -86,6 +88,7 @@ jobs:
             -e DB_PASSWORD=${{ secrets.REGISTER_USER_PASS }} \
             -e DB_HOST=${{ secrets.REGISTER_USER_HOST }} \
             -e DB_DIALECT=${{ secrets.REGISTER_USER_DIALECT }} \
+            -e JWT_SECRET=${{ secrets.JWT_SECRET }} \
             ${{ secrets.DOCKER_USERNAME }}/login-user-service:latest
 
           # Verificar que el contenedor esté corriendo
