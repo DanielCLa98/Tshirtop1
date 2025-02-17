@@ -1,3 +1,8 @@
-# TshirtTop_PD
-# Product Catalog, Search and Filter products
-# BD: MySql
+# productById  
+
+This microservice retrieves a product from the database using its **ID**.  
+
+### Technologies Used:  
+- **MySQL**  
+- **JavaScript**  
+
