@@ -29,7 +29,7 @@ jobs:
     # Paso 3: Construir la imagen Docker usando los secrets
     - name: Build Docker image
       run: |
-        docker build \
+        docker buildx build \
           --file Backend_tshirtop1/Authentication_and_Authorization/login_user/Dockerfile \
           --build-arg DB_NAME=${{ secrets.REGISTER_USER_BD }} \
           --build-arg DB_USER=${{ secrets.REGISTER_USER_U }} \
@@ -82,7 +82,7 @@ jobs:
             secrets.SERVER_PORT_LOGIN_USER }}..."
           sudo docker run -d \
             --name login-user-service \
-            -p 3306:${{ secrets.SERVER_PORT_LOGIN_USER }} \
+            -p 3306:3306 \
             -e DB_NAME=${{ secrets.REGISTER_USER_BD }} \
             -e DB_USER=${{ secrets.REGISTER_USER_U }} \
             -e DB_PASSWORD=${{ secrets.REGISTER_USER_PASS }} \
