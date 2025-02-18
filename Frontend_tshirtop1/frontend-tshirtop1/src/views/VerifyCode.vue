@@ -17,7 +17,7 @@
 
 <script>
 
-// import { recovery } from '../utils/api';  <-- ❌ Comentar o eliminar esta línea
+// import { recovery } from '../utils/api'; 
 
 export default {
   data() {
