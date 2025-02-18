@@ -33,11 +33,11 @@ jobs:
 
     - name: 📦 Build and Push Docker Image
       run: |
-        docker build . \
+        docker build Frontend_tshirtop1/frontend-tshirtop1 \
           --build-arg PORT=5000 \
           --build-arg AUTH_HOST=${{ secrets.EC2_HOST_LOGIN_USER }} \
           --build-arg AUTH_PORT=${{ secrets.SERVER_PORT_LOGIN_USER }} \
-          --file Dockerfile \
+          --file Frontend_tshirtop1/frontend-tshirtop1/Dockerfile \
           --tag ${{ secrets.DOCKER_USERNAME }}/frontend-tshirtop1:${{ env.version_tag }} \
           --tag ${{ secrets.DOCKER_USERNAME }}/frontend-tshirtop1:latest 
 
