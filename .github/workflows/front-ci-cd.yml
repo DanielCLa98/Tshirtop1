@@ -41,7 +41,8 @@ jobs:
           --tag ${{ secrets.DOCKER_USERNAME }}/frontend-tshirtop1:${{ env.version_tag }} \
           --tag ${{ secrets.DOCKER_USERNAME }}/frontend-tshirtop1:latest 
 
-        docker push ${{ secrets.DOCKER_USERNAME }}/frontend-tshirtop1:${{ env.version_tag }}
+        docker push ${{ secrets.DOCKER_USERNAME }}/frontend-tshir
+        top1:${{ env.version_tag }}
         docker push ${{ secrets.DOCKER_USERNAME }}/frontend-tshirtop1:lat
         est
 
