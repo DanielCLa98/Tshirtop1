@@ -55,7 +55,7 @@ jobs:
       with:
         host: ${{ secrets.EC2_HOST_FRONT }}
         username: ${{ secrets.EC2_USER }}
-        key: ${{ secrets.EC2_SSH_KEY }}
+        key_path: ${{ secrets.EC2_SSH_KEY }}
         port: 22
         script: |
           echo "🔍 Checking if Docker is installed..."
