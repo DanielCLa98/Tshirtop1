@@ -10,7 +10,7 @@
 
 <script>
 import ProductCard from "../components/ProductCard.vue";
-import { getAllProducts } from "../utils/productService";
+// import { getAllProducts } from "../utils/productService";
 
 export default {
   name: "HomePage",
@@ -23,7 +23,7 @@ export default {
     };
   },
   async mounted() {
-    this.products = await getAllProducts(); // ✅ Llamar a la API al montar el componente
+    // this.products = await getAllProducts(); //
   }
 };
 </script>

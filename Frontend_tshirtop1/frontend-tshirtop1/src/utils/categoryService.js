@@ -1,4 +1,4 @@
-import { back } from "./api";
+/* import { back } from "./api";
 
 // Obtener todas las categorías
 export const getAllCategories = async () => {
@@ -54,3 +54,4 @@ export const deleteCategory = async (id) => {
     return null;
   }
 };
+ */

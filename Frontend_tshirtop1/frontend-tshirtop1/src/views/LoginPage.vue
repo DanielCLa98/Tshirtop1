@@ -12,9 +12,12 @@
           <input v-model="password" type="password" required class="w-full px-3 py-2 border rounded-lg" />
         </div>
         <p v-if="errorMessage" class="text-red-500 text-center">{{ errorMessage }}</p>
-        <div class="flex justify-between space-x-4 mt-4">
-          <button type="submit" class="w-1/2 bg-blue-500 text-white py-2 rounded-lg">Ingresar</button>
-          <router-link to="/register" class="w-1/2 bg-green-500 text-white py-2 rounded-lg text-center">
+        <div class="flex flex-col space-y-2 mt-4">
+          <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg">Ingresar</button>
+          <router-link to="/reset-password" class="w-full bg-gray-500 text-white py-2 rounded-lg text-center">
+            Olvidé mi contraseña
+          </router-link>
+          <router-link to="/register" class="w-full bg-green-500 text-white py-2 rounded-lg text-center">
             Registrarse
           </router-link>
         </div>
@@ -37,7 +40,7 @@ export default {
   methods: {
     async login() {
       try {
-        const response = await axios.post("http://localhost:3002/protected/login", {
+        const response = await api.post("/login", {
           email: this.email,
           password: this.password
         });

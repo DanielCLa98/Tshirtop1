@@ -41,7 +41,7 @@ const User = sequelize.define('User',{
         type: DataTypes.DATE,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
     },
-    role_id:{
+    id_role:{
         type: DataTypes.INTEGER,
         allowNull: false,
         references:{
@@ -54,6 +54,6 @@ const User = sequelize.define('User',{
     timestamps: false,
 });
 
-User.belongsTo(Role,{foreignKey: 'role_id', as: 'role'});
+User.belongsTo(Role,{foreignKey: 'id_role', as: 'role'});
 
 module.exports = User;

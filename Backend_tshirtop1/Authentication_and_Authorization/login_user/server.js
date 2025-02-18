@@ -5,7 +5,7 @@ const protectedLogin = require('./routes/protectes_userLogin');
 const swaggerUi = require('swagger-ui-express');
 const swaggerSpec = require('./config/swagger');
 const cors = require('cors');
-
+//test
 const app = express();
 
 app.use(cors({
@@ -23,7 +23,7 @@ app.use('/protected', protectedLogin);
 sequelize.sync({ force: false }) 
   .then(() => {
     console.log('Tablas creadas o sincronizadas correctamente');
-    const PORT = process.env.PORT || 3002;
+    const PORT = process.env.PORT || 3306;
     app.listen(PORT, () => {
       console.log(`Servidor ejecutándose en el puerto ${PORT}`);
       console.log(`Documentación disponible en http://localhost:${PORT}/api-docs`);

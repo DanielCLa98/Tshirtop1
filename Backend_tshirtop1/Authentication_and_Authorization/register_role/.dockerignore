@@ -1,0 +1,23 @@
+# Ignorar node_modules, ya que las dependencias se instalan dentro del contenedor
+node_modules
+
+# Ignorar archivos de logs
+*.log
+
+# Ignorar el directorio de dependencias y build
+/dist
+/build
+
+# Ignorar archivos de configuración de IDE
+.vscode
+.idea
+
+# Ignorar archivos temporales y del sistema
+.DS_Store
+Thumbs.db
+
+# Ignorar el archivo de entorno local
+.env
+
+# Ignorar el directorio de pruebas si no es necesario para el contenedor
+/tests

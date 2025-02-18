@@ -1,4 +1,4 @@
-import { back } from "./api";
+/* import { back } from "./api";
 
 // Obtener todos los productos
 export const getAllProducts = async () => {
@@ -54,3 +54,4 @@ export const deleteProduct = async (id) => {
     return null;
   }
 };
+ */

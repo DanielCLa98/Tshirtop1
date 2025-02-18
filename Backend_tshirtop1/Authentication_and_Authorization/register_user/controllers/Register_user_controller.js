@@ -3,10 +3,10 @@ const bcrypt = require('bcrypt');
 
 const registerUser = async (req, res) => {
     try {
-        const { user_name, first_name, middle_name, lastname, email, password, role_id } = req.body;
+        const { user_name, first_name, middle_name, lastname, email, password, id_role } = req.body;
 
         // Validar si faltan campos
-        if (!user_name || !first_name || !lastname || !email || !password || !role_id) {
+        if (!user_name || !first_name || !lastname || !email || !password || !id_role) {
             return res.status(400).json({ message: 'The fields user name, first name, last name, email, password, role are mandatory.' });
         }
 
@@ -27,7 +27,7 @@ const registerUser = async (req, res) => {
             lastname,
             email,
             password: hashedPassword,
-            role_id,
+            id_role,
         });
 
         // Respuesta exitosa
