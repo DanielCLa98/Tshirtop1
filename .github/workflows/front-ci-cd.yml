@@ -80,7 +80,7 @@ jobs:
           echo "Ejecutando nuevo contenedor en el puerto 5000..."
           sudo docker run -d \
             --name frontend-tshirtop1 \
-            -p 80:5000 \
+            -p 5000:5000 \
             -e VITE_API_HOST_AUTH_HOST=${{ secrets.EC2_HOST_LOGIN_USER }} \
             -e VITE_API_HOST_AUTH_PORT=${{ secrets.SERVER_PORT_LOGIN_USER }} \
             ${{ secrets.DOCKER_USERNAME }}/frontend-tshirtop1:latest
