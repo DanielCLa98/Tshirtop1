@@ -1,4 +1,4 @@
-name: 🚀 Docker Image CI/CD for Frontend tshirtop
+name: 🚀 Docker Image CI/CD for Frontend UcShoes
 
 on:
   push:
@@ -9,7 +9,9 @@ on:
   pull_request:
     paths:
       - 'Frontend_tshirtop1/frontend-tshirtop1/**'
-    branches: ["QA", "main"]
+    branches:
+      - 'QA'
+      - 'main'
 
 jobs:
   build:
@@ -17,27 +19,28 @@ jobs:
 
     steps:
     # Paso 1: Checkout del repositorio
-    - name: 🛠️ Checkout Repository
-      uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v3
 
     # Paso 2: Login en Docker Hub
-    - name: 🔐 Log in to DockerHub
+    - name: Log in to Docker Hub
       uses: docker/login-action@v2
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
-    # Paso 3: Construir la imagen Docker usando los secrets
-    - name: 📦 Build Docker image
+    # Paso 3: Construir la imagen Docker
+    - name: Build Docker image
       run: |
-        docker build Frontend_tshirtop1/frontend-tshirtop1/. --file Frontend_tshirtop1/frontend-tshirtop1/Dockerfile \
+        docker build Frontend_tshirtop1/frontend-tshirtop1/. \
+          --file Frontend_tshirtop1/frontend-tshirtop1/Dockerfile \
           --build-arg PORT=5000 \
           --build-arg AUTH_HOST=${{ secrets.EC2_HOST_LOGIN_USER }} \
           --build-arg AUTH_PORT=${{ secrets.SERVER_PORT_LOGIN_USER }} \
           -t ${{ secrets.DOCKER_USERNAME }}/frontend-tshirtop1:latest
 
     # Paso 4: Subir la imagen a Docker Hub
-    - name: 🚀 Push Docker image to Docker Hub
+    - name: Push Docker image to Docker Hub
       run: |
         docker push ${{ secrets.DOCKER_USERNAME }}/frontend-tshirtop1:latest
 
@@ -47,7 +50,7 @@ jobs:
 
     steps:
     # Paso 1: Conectar al servidor EC2 usando SSH
-    - name: 🖥️ Deploy to EC2
+    - name: Deploy to EC2
       uses: appleboy/ssh-action@v0.1.8
       with:
         host: ${{ secrets.EC2_HOST_FRONT }}
@@ -65,16 +68,27 @@ jobs:
           fi
 
           # Detener y eliminar el contenedor previo si existe
-          echo "🛑 Stopping and removing old container..."
-          sudo docker ps -q --filter "name=frontend-tshirtop1" | grep -q . && \
-          sudo docker stop frontend-tshirtop1 && sudo docker rm frontend-tshirtop1 || true
-
+          echo "Deteniendo y eliminando contenedor previo..."
+          sudo docker stop frontend-tshirtop1 || true
+          sudo docker rm frontend-tshirtop1 || true
+          
           # Descargar la última imagen desde Docker Hub
-          echo "📥 Pulling latest Docker image..."
+          echo "Actualizando imagen desde Docker Hub..."
           sudo docker pull ${{ secrets.DOCKER_USERNAME }}/frontend-tshirtop1:latest
-
+          
           # Ejecutar el nuevo contenedor en el puerto 5000
-          echo "🚀 Running new container on port 5000..."
-          sudo docker run -d --name frontend-tshirtop1 -p 80:5000 \
+          echo "Ejecutando nuevo contenedor en el puerto 5000..."
+          sudo docker run -d \
+            --name frontend-tshirtop1 \
+            -p 80:5000 \
             -e VITE_API_HOST_AUTH_HOST=${{ secrets.EC2_HOST_LOGIN_USER }} \
-            -e VITE_API_HOST_AUTH_PORT=${{ secrets.SERVER_PORT_LOGIN_
+            -e VITE_API_HOST_AUTH_PORT=${{ secrets.SERVER_PORT_LOGIN_USER }} \
+            ${{ secrets.DOCKER_USERNAME }}/frontend-tshirtop1:latest
+
+          # Verificar que el contenedor esté corriendo
+          if sudo docker ps -f name=frontend-tshirtop1 | grep frontend-tshirtop1; then
+            echo "✅ Contenedor corriendo correctamente."
+          else
+            echo "❌ Error al iniciar el contenedor. Revisa los logs."
+            exit 1
+          fi  
