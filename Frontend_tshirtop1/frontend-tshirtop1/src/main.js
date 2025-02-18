@@ -3,7 +3,7 @@ import App from './App.vue';
 import './assets/main.css';
 import router from "./router";
 import { createPinia } from "pinia";
-
+//tst
 const pinia = createPinia();
 const app = createApp(App);
 
