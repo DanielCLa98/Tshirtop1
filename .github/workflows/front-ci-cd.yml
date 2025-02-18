@@ -33,7 +33,7 @@ jobs:
 
     - name: 📦 Build and Push Docker Image
       run: |
-        docker build Frontend_tshirtop1/frontend-tshirtop1 \
+          docker build Backend_tshirtop1/Authentication_and_Authorization/register_user/. \ --file C:/Users/Daniel/Documents/Universidad/Tshirtop1/Frontend_tshirtop1/frontend-tshirtop1/Dockerfile
           --build-arg PORT=5000 \
           --build-arg AUTH_HOST=${{ secrets.EC2_HOST_LOGIN_USER }} \
           --build-arg AUTH_PORT=${{ secrets.SERVER_PORT_LOGIN_USER }} \
@@ -41,8 +41,8 @@ jobs:
           --tag ${{ secrets.DOCKER_USERNAME }}/frontend-tshirtop1:${{ env.version_tag }} \
           --tag ${{ secrets.DOCKER_USERNAME }}/frontend-tshirtop1:latest 
 
-        docker push ${{ secrets.DOCKER_USERNAME }}/frontend-tshirtop1:${{ env.version_tag }}
-        docker push ${{ secrets.DOCKER_USERNAME }}/frontend-tshirtop1:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/frontend-tshirtop1:${{ env.version_tag }}
+          docker push ${{ secrets.DOCKER_USERNAME }}/frontend-tshirtop1:latest
 
 
   deploy:
