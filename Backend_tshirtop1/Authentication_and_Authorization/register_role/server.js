@@ -5,7 +5,7 @@ const roleRoutes = require('./routes/Role_routes');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocs = require('./config/swagger');
 const app = express();
-//test
+
 // Middlewares
 app.use(bodyParser.json());
 
