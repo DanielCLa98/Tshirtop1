@@ -70,22 +70,26 @@ export default {
         return;
       }
 
-      try {
-        const response = await axios.post("http://localhost:3001/register/user",
-          {
-            user_name: this.user_name,
-            first_name: this.first_name,
-            middle_name: this.middle_name || null,
-            lastname: this.lastname,
-            email: this.email,
-            password: this.password,
-            role_id: this.role_id
-          },
-          {
-            headers: { "Content-Type": "application/json" }
-          }
-        );
-
+     try {
+  const response = await axios.post(
+    `${process.env.EC2_HOST_REGISTER_USER}/register/user`, // Usar la secret EC2_HOST_REGISTER_USER
+    {
+      user_name: this.user_name,
+      first_name: this.first_name,
+      middle_name: this.middle_name || null,
+      lastname: this.lastname,
+      email: this.email,
+      password: this.password,
+      role_id: this.role_id,
+    },
+    {
+      headers: { "Content-Type": "application/json" },
+    }
+  );
+  console.log("Registration successful:", response.data);
+} catch (error) {
+  console.error("Registration request error:", error);
+}
         this.successMessage = "Registration successful. Redirecting to login...";
         this.errorMessage = "";
 
