@@ -5,7 +5,7 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerJsDoc = require('swagger-jsdoc');
 const sequelize = require('./config/database');
 
-
+//test
 const app = express();
 const PORT = process.env.PORT || 3004;
 
