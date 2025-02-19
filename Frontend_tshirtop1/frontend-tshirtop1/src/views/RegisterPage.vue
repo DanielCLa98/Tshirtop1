@@ -70,7 +70,7 @@ export default {
         return;
       }
 
-   try {
+      try {
         const response = await axios.post("http://localhost:3001/register/user",
           {
             user_name: this.user_name,
@@ -85,10 +85,7 @@ export default {
             headers: { "Content-Type": "application/json" }
           }
         );
-  console.log("Registration successful:", response.data);
-} catch (error) {
-  console.error("Registration request error:", error);
-}
+
         this.successMessage = "Registration successful. Redirecting to login...";
         this.errorMessage = "";
 
