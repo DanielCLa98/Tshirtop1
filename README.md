@@ -1,11 +1,31 @@
-# T-shirtTop: E-commerce Application
+# 🛍️ Tshirtop1 - Clothing E-commerce  
 
-T-shirtTop is an e-commerce application where you can browse a variety of clothing items in different sizes, tailored to your preferences.
+This is a clothing e-commerce platform based on **microservices** and deployed on **AWS**.  
 
-## Project Structure  
+## 📂 Project Structure  
 
-The application is divided into two main domains, each with its corresponding microservices:
+- **Backend_tshirtop1/** → Backend microservices  
+- **Frontend_tshirtop1/** → Frontend application  
+- **api-gateway/** → API Gateway  
+- **.github/workflows/** → GitHub Actions configuration  
 
-- **Categories**  
-- **Products**  
+## 🚀 Technologies  
+
+- **Backend:** Node.js, Express  
+- **Frontend:**   
+- **Database:** Amazon RDS (SQL) and MongoDB (NoSQL)  
+- **Authentication:** JWT and CORS  
+- **Infrastructure:** AWS EC2, Load Balancer
+- **CI/CD:** GitHub Actions  
+
+## 🔧 Installation  
+
+1. Clone the repository  
+
+   ```sh
+   git clone https://github.com/DanielCLa98/Tshirtop1.git
+   cd Tshirtop1
+   npm intall en cada microservicio
+
+
 
