@@ -5,7 +5,7 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerSpec = require('./config/swagger');
 const registerRoutes = require('./routes/Register_User_Routes');
 const cors = require('cors');
-//test
+
 const app = express();
 
 app.use(cors()); // Esto permite solicitudes desde cualquier origen
