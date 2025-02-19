@@ -7,7 +7,7 @@ const registerRoutes = require('./routes/Register_User_Routes');
 const cors = require('cors');
 
 const app = express();
-
+//test
 app.use(cors()); // Esto permite solicitudes desde cualquier origen
 
 app.use(bodyParser.json());
