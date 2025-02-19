@@ -4,7 +4,7 @@ const { sequelize } = require('./config/database');
 const deleteProductRoute = require('./routes/deleteProductRoute');
 const swaggerUi = require('swagger-ui-express');
 const swaggerJsDoc = require('swagger-jsdoc');
-//tst
+//test
 dotenv.config();
 
 const app = express();
