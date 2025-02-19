@@ -1,5 +1,29 @@
-# Vue 3 + Vite
+# 🎨 TshirtShop - Frontend  
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+This is the frontend for **TshirtShop**, an e-commerce platform for clothing based on **microservices** and deployed on **AWS**.  
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+## 📂 Project Structure  
+
+- **public/** → Static files  
+- **src/** → Application source code  
+- **.vscode/** → Editor configuration  
+- **Dockerfile** → Configuration file for containers  
+- **package.json** → Project dependencies and settings  
+- **vite.config.js** → Vite configuration  
+
+## 🚀 Technologies  
+
+- **Framework:** React.js with Vite  
+- **Styling:** Tailwind CSS  
+- **Authentication:** JWT and CORS  
+- **Infrastructure:** Docker, AWS EC2  
+- **CI/CD:** GitHub Actions  
+
+## 🔧 Installation  
+
+1. Clone the repository  
+
+   ```sh
+   git clone https://github.com/DanielCLa98/Tshirtop1.git
+   cd Tshirtop1/Frontend_tshirtop1
+
