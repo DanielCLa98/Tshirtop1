@@ -1,4 +1,4 @@
-name: 🚀 Docker Image CI/CD for Frontend UcShoes
+name: 🚀 Docker Image CI/CD for Frontend tshirtop
 
 on:
   push:
