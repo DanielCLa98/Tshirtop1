@@ -1,30 +1,31 @@
-# 🛍️ Tshirtop1 - E-commerce de Ropa  
+# 🛍️ Tshirtop1 - Clothing E-commerce  
 
-Este es un e-commerce de ropa basado en **microservicios** y desplegado en **AWS**.  
+This is a clothing e-commerce platform based on **microservices** and deployed on **AWS**.  
 
-## 📂 Estructura del Proyecto  
+## 📂 Project Structure  
 
-- **Backend_tshirtop1/** → Microservicios backend  
-- **Frontend_tshirtop1/** → Aplicación frontend  
+- **Backend_tshirtop1/** → Backend microservices  
+- **Frontend_tshirtop1/** → Frontend application  
 - **api-gateway/** → API Gateway  
-- **.github/workflows/** → Configuración de GitHub Actions  
+- **.github/workflows/** → GitHub Actions configuration  
 
-## 🚀 Tecnologías  
+## 🚀 Technologies  
 
 - **Backend:** Node.js, Express  
-- **Frontend:** React.js  
-- **Base de Datos:** Amazon RDS (SQL) y MongoDB (NoSQL)  
-- **Autenticación:** JWT y CORS  
-- **Infraestructura:** AWS EC2, Load Balancer 
+- **Frontend:**   
+- **Database:** Amazon RDS (SQL) and MongoDB (NoSQL)  
+- **Authentication:** JWT and CORS  
+- **Infrastructure:** AWS EC2, Load Balancer
 - **CI/CD:** GitHub Actions  
 
-## 🔧 Instalación  
+## 🔧 Installation  
 
-1. Clonar el repositorio  
+1. Clone the repository  
 
    ```sh
    git clone https://github.com/DanielCLa98/Tshirtop1.git
    cd Tshirtop1
-   npm install en cada microservicio
+   npm intall en cada microservicio
+
 
 
